@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quick Mirror</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleX(-1); /* mirror effect */
+    }
+  </style>
+</head>
+<body>
+  <video id="cam" autoplay playsinline></video>
+
+  <script>
+    navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" },
+      audio: false
+    })
+    .then(stream => {
+      document.getElementById("cam").srcObject = stream;
+    })
+    .catch(() => {
+      alert("Camera permission denied.");
+    });
+  </script>
+</body>
+</html>
